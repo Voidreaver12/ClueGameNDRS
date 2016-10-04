@@ -71,6 +71,6 @@ public class Board {
 	}
 	
 	public BoardCell getCellAt(int row, int column) {
-		return null;
+		return board[row][column];
 	}
 }

@@ -1,0 +1,11 @@
+B, BrownBuilding, Card
+M, MarquezHall, Card
+G, GreenCenter, Card
+C, CTLM, Card
+S, StrattonHall, Card
+H, HillHall, Card
+L, Library, Card
+A, Alderson, Card
+I, IntramuralFields, Card
+K, Kafadar, Card
+X, Streets, Other
