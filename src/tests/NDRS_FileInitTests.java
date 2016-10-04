@@ -29,11 +29,14 @@ public class NDRS_FileInitTests {
 	public void testRooms() {
 		Map<Character, String> legend = board.getLegend();
 		assertEquals(LEGEND_SIZE, legend.size());
+		assertEquals("BrownBuilding", legend.get('B'));
 		assertEquals("GreenCenter", legend.get('G'));
 		assertEquals("MarquezHall", legend.get('M'));
 		assertEquals("CTLM", legend.get('C'));
-		assertEquals("Alderson", legend.get('A'));
-		assertEquals("BrownBuilding", legend.get('B'));
+		assertEquals("IntramuralFields", legend.get('I'));
+		assertEquals("Kafadar", legend.get('K'));
+		assertEquals("Streets", legend.get('X'));
+		
 	}
 	
 	@Test
