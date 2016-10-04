@@ -1,6 +1,6 @@
 // Noah Deibert
 // Robert Schreibman
-package experiment;
+package clueGame;
 
 public class BoardCell {
 	
