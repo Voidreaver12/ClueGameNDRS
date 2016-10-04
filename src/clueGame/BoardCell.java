@@ -11,6 +11,7 @@ public class BoardCell {
 	}
 	private int column;
 	private int row;
+	private char initial;
 	public int getColumn() {
 		return column;
 	}
@@ -27,5 +28,22 @@ public class BoardCell {
 	public String toString() {
 		return "BoardCell [column=" + column + ", row=" + row + "]";
 	}
-	
+	public boolean isWalkway() {
+		return false;
+		
+	}
+	public boolean isRoom() {
+		return false;
+		
+	}
+	public boolean isDoorway() {
+		return false;
+		
+	}
+	public DoorDirection getDoorDirection() {
+		return null;
+	}
+	public char getInitial() {
+		return initial;
+	}
 }
