@@ -14,6 +14,7 @@ public class Board {
 	public final static int MAX_BOARD_SIZE = 50;
 	private BoardCell[][] board = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
 	private Map<Character, String> rooms = new HashMap<Character, String>();
+	private Map<Character, String> legend = new HashMap<Character, String>();
 	private Map<BoardCell, Set<BoardCell>> adjMatrix = new HashMap<BoardCell, Set<BoardCell>>();
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
 	private String boardConfigFile;
@@ -41,6 +42,7 @@ public class Board {
 			while (scanner.hasNextLine()) {
 				String line[] = scanner.nextLine().split(", ");
 				rooms.put(line[0].charAt(0), line[1]);
+				legend.put(line[0].charAt(0), line[2]);
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
@@ -58,11 +60,14 @@ public class Board {
 				String line[] = scanner.nextLine().split(",");
 				for (col = 0; col < line.length; col++) {
 					board[row][col] = new BoardCell(row, col, line[col].charAt(0));
+					if (line[col].length() > 1) {
+						board[row][col].setDoor(line[col].charAt(1));
+					}
 				}
 				row++;
 			}
-			numColumns = col + 1;
-			numRows = row + 1;
+			numColumns = col;
+			numRows = row;
 			scanner.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -70,41 +75,9 @@ public class Board {
 	}
 	
 	public void calcAdjacencies() {
-		for (int i = 0; i < numRows; i++) {
-			for (int j = 0; j < numColumns; j++) {
-				Set<BoardCell> adjSet = new HashSet<BoardCell>();
-				BoardCell thisCell  = board[i][j];
-				if (i != 0) {
-					adjSet.add(board[i-1][j]);	
-				}
-				if (i != numRows - 1) {
-					adjSet.add(board[i+1][j]);
-				}
-				if (j != 0) {
-					adjSet.add(board[i][j-1]);
-				}
-				if (j != numColumns - 1) {
-					adjSet.add(board[i][j+1]);
-				}
-				adjMatrix.put(thisCell, adjSet);
-			}
-		}
 	}
 	
 	public void calcTargets(BoardCell cell, int pathLength) {
-		Set<BoardCell> tempSet = adjMatrix.get(cell);
-		if (pathLength == 1) {
-			for (BoardCell c : tempSet) {
-				if (!targets.contains(c)) {
-					targets.add(c);
-				}
-			}
-		}
-		else {
-			for (BoardCell c : tempSet) {
-				calcTargets(c, pathLength-1);
-			}
-		}
 	}
 
 	public int getNumRows() {
