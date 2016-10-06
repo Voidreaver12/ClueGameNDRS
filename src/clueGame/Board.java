@@ -2,6 +2,7 @@ package clueGame;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -31,17 +32,26 @@ public class Board {
 	}
 	
 	public void initialize() {
-		loadRoomConfig();
-		loadBoardConfig();
+		try {
+			loadRoomConfig();
+			loadBoardConfig();
+		} catch (BadConfigFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	
-	public void loadRoomConfig() {
+	public void loadRoomConfig() throws BadConfigFormatException {
 		try {
 			FileReader reader = new FileReader(roomConfigFile);
 			Scanner scanner = new Scanner(reader);
 			while (scanner.hasNextLine()) {
 				String line[] = scanner.nextLine().split(", ");
 				rooms.put(line[0].charAt(0), line[1]);
+				if (line[2] != "Card" && line[2] != "Other") {
+					throw new BadConfigFormatException();
+				}
 				legend.put(line[0].charAt(0), line[2]);
 			}
 			scanner.close();
@@ -50,23 +60,35 @@ public class Board {
 		}
 	}
 	
-	public void loadBoardConfig() {
+	public void loadBoardConfig() throws BadConfigFormatException {
 		try {
 			FileReader reader = new FileReader(boardConfigFile);
 			Scanner scanner = new Scanner(reader);
 			int row = 0;
 			int col = 0;
+			String line[] = scanner.nextLine().split(",");
+			for (col = 0; col < col; col++) {
+				board[row][col] = new BoardCell(row, col, line[col].charAt(0));
+				if (line[col].length() > 1) {
+					board[row][col].setDoor(line[col].charAt(1));
+				}
+			}
+			numColumns = col;
+			row++;
 			while (scanner.hasNextLine()) {
-				String line[] = scanner.nextLine().split(",");
-				for (col = 0; col < line.length; col++) {
+				line = scanner.nextLine().split(",");
+				if (line.length != numColumns) {
+					throw new BadConfigFormatException();
+				}
+				for (col = 0; col < col; col++) {
 					board[row][col] = new BoardCell(row, col, line[col].charAt(0));
 					if (line[col].length() > 1) {
 						board[row][col].setDoor(line[col].charAt(1));
 					}
 				}
 				row++;
+				
 			}
-			numColumns = col;
 			numRows = row;
 			scanner.close();
 		} catch (FileNotFoundException e) {
