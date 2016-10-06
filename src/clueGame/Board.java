@@ -30,7 +30,8 @@ public class Board {
 	}
 	
 	public void initialize() {
-		
+		loadRoomConfig();
+		loadBoardConfig();
 	}
 	
 	public void loadRoomConfig() {
@@ -41,6 +42,7 @@ public class Board {
 				String line[] = scanner.nextLine().split(", ");
 				rooms.put(line[0].charAt(0), line[1]);
 			}
+			scanner.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -51,24 +53,58 @@ public class Board {
 			FileReader reader = new FileReader(boardConfigFile);
 			Scanner scanner = new Scanner(reader);
 			int row = 0;
+			int col = 0;
 			while (scanner.hasNextLine()) {
 				String line[] = scanner.nextLine().split(",");
-				for (int col = 0; col < line.length; col++) {
+				for (col = 0; col < line.length; col++) {
 					board[row][col] = new BoardCell(row, col, line[col].charAt(0));
 				}
 				row++;
 			}
+			numColumns = col + 1;
+			numRows = row + 1;
+			scanner.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public void calcAdjacencies() {
-		
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; j < numColumns; j++) {
+				Set<BoardCell> adjSet = new HashSet<BoardCell>();
+				BoardCell thisCell  = board[i][j];
+				if (i != 0) {
+					adjSet.add(board[i-1][j]);	
+				}
+				if (i != numRows - 1) {
+					adjSet.add(board[i+1][j]);
+				}
+				if (j != 0) {
+					adjSet.add(board[i][j-1]);
+				}
+				if (j != numColumns - 1) {
+					adjSet.add(board[i][j+1]);
+				}
+				adjMatrix.put(thisCell, adjSet);
+			}
+		}
 	}
 	
 	public void calcTargets(BoardCell cell, int pathLength) {
-		
+		Set<BoardCell> tempSet = adjMatrix.get(cell);
+		if (pathLength == 1) {
+			for (BoardCell c : tempSet) {
+				if (!targets.contains(c)) {
+					targets.add(c);
+				}
+			}
+		}
+		else {
+			for (BoardCell c : tempSet) {
+				calcTargets(c, pathLength-1);
+			}
+		}
 	}
 
 	public int getNumRows() {
