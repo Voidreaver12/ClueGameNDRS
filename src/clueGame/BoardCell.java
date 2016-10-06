@@ -4,10 +4,11 @@ package clueGame;
 
 public class BoardCell {
 	
-	public BoardCell(int column, int row) {
+	public BoardCell(int row, int col, char initial) {
 		super();
 		this.column = column;
 		this.row = row;
+		this.initial = initial;
 	}
 	private int column;
 	private int row;
@@ -26,7 +27,7 @@ public class BoardCell {
 	}
 	@Override
 	public String toString() {
-		return "BoardCell [column=" + column + ", row=" + row + "]";
+		return "BoardCell [row=" + row + ", column=" + column + "]";
 	}
 	public boolean isWalkway() {
 		return false;

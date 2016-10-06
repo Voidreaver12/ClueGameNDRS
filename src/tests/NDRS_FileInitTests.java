@@ -45,9 +45,6 @@ public class NDRS_FileInitTests {
 		assertEquals(NUM_COLUMNS, board.getNumColumns());		
 	}
 	
-	// Test a doorway in each direction (RIGHT/LEFT/UP/DOWN), plus 
-	// two cells that are not a doorway.
-	// These cells are white on the planning spreadsheet
 	@Test
 	public void FourDoorDirections() {
 		BoardCell room = board.getCellAt(3, 4);
