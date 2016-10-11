@@ -2,7 +2,6 @@ package clueGame;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -15,7 +14,6 @@ public class Board {
 	public final static int MAX_BOARD_SIZE = 50;
 	private BoardCell[][] board = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
 	private Map<Character, String> rooms = new HashMap<Character, String>();
-	private Map<Character, String> legend = new HashMap<Character, String>();
 	private Map<BoardCell, Set<BoardCell>> adjMatrix = new HashMap<BoardCell, Set<BoardCell>>();
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
 	private String boardConfigFile;
@@ -31,17 +29,20 @@ public class Board {
 		return theInstance;
 	}
 	
+	// Initialization and file reading
 	public void initialize() {
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
 		} catch (BadConfigFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
-	
+	public void setConfigFiles(String csv, String txt) {
+		boardConfigFile = csv;
+		roomConfigFile = txt;
+	}
 	public void loadRoomConfig() throws BadConfigFormatException {
 		try {
 			FileReader reader = new FileReader(roomConfigFile);
@@ -49,96 +50,86 @@ public class Board {
 			while (scanner.hasNextLine()) {
 				String line[] = scanner.nextLine().split(", ");
 				rooms.put(line[0].charAt(0), line[1]);
-				if (line[2] != "Card" && line[2] != "Other") {
+				if (!line[2].equals("Card") && !line[2].equals("Other")) {
+					// throw error
+					scanner.close();
 					throw new BadConfigFormatException();
 				}
-				legend.put(line[0].charAt(0), line[2]);
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-	
 	public void loadBoardConfig() throws BadConfigFormatException {
 		try {
 			FileReader reader = new FileReader(boardConfigFile);
 			Scanner scanner = new Scanner(reader);
 			int row = 0;
-			int col = 0;
-			String line[] = scanner.nextLine().split(",");
-			for (col = 0; col < col; col++) {
-				board[row][col] = new BoardCell(row, col, line[col].charAt(0));
-				if (line[col].length() > 1) {
-					board[row][col].setDoor(line[col].charAt(1));
-				}
-			}
-			numColumns = col;
-			row++;
+			int columns = 0;
 			while (scanner.hasNextLine()) {
-				line = scanner.nextLine().split(",");
-				if (line.length != numColumns) {
-					throw new BadConfigFormatException();
+				String[] line = scanner.nextLine().split(",");
+				if (row == 0) {
+					columns = line.length;
 				}
-				for (col = 0; col < col; col++) {
+				else {
+					if (columns != line.length) {
+						// throw error
+						scanner.close();
+						throw new BadConfigFormatException();
+					}
+				}
+				for (int col = 0; col < line.length; col++) {
+					if (!rooms.containsKey(line[col].charAt(0))) {
+						// throw error
+						scanner.close();
+						throw new BadConfigFormatException();
+					}
 					board[row][col] = new BoardCell(row, col, line[col].charAt(0));
 					if (line[col].length() > 1) {
-						board[row][col].setDoor(line[col].charAt(1));
+						board[row][col].setInitial2(line[col].charAt(1));
 					}
 				}
 				row++;
-				
 			}
 			numRows = row;
+			numColumns = columns;
 			scanner.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	// Adjacencies and targets
 	public void calcAdjacencies() {
-	}
-	
-	public void calcTargets(BoardCell cell, int pathLength) {
-	}
-
-	public int getNumRows() {
-		return numRows;
-	}
-
-	public void setNumRows(int numRows) {
-		this.numRows = numRows;
-	}
-
-	public int getNumColumns() {
-		return numColumns;
-	}
-
-	public void setNumColumns(int numColumns) {
-		this.numColumns = numColumns;
-	}
-
-	public void setConfigFiles(String csv, String txt) {
-		boardConfigFile = csv;
-		roomConfigFile = txt;
-	}
-	
-	public Map<Character, String> getLegend() {
-		return rooms;
-	}
-	
-	public BoardCell getCellAt(int row, int column) {
-		return board[row][column];
-	}
-	
+	}	
 	public Set<BoardCell> getAdjList(int row, int column) {
-		return null;
+		return adjMatrix.get(board[row][column]);
 	}
-	
 	public void calcTargets(int row, int column, int numSteps) {
 		
 	}
 	public Set<BoardCell> getTargets() {
-		return null;
+		return targets;
+	}
+	
+	// Misc getters and setters
+	public int getNumRows() {
+		return numRows;
+	}
+	public void setNumRows(int numRows) {
+		this.numRows = numRows;
+	}
+	public int getNumColumns() {
+		return numColumns;
+	}
+	public void setNumColumns(int numColumns) {
+		this.numColumns = numColumns;
+	}
+	public Map<Character, String> getLegend() {
+		return rooms;
+	}
+	public BoardCell getCellAt(int row, int column) {
+		return board[row][column];
 	}
 }

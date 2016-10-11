@@ -13,7 +13,8 @@ public class BoardCell {
 	private int column;
 	private int row;
 	private char initial;
-	private DoorDirection direction = DoorDirection.NONE;
+	private char initial2;
+	
 	public int getColumn() {
 		return column;
 	}
@@ -31,9 +32,6 @@ public class BoardCell {
 		return "BoardCell [row=" + row + ", column=" + column + "]";
 	}
 	public boolean isWalkway() {
-		if (initial == 'X') {
-			return true;
-		}
 		return false;
 		
 	}
@@ -42,36 +40,34 @@ public class BoardCell {
 		
 	}
 	public boolean isDoorway() {
-		if (direction != DoorDirection.NONE) {
+		if (initial2 == 'U' || initial2 == 'D' || initial2 == 'L' || initial2 == 'R') {
 			return true;
 		}
 		return false;
 		
 	}
 	public DoorDirection getDoorDirection() {
-		return direction;
+		switch (initial2) {
+			case 'D':
+				return DoorDirection.DOWN;
+			case 'U':
+				return DoorDirection.UP;
+			case 'R':
+				return DoorDirection.RIGHT;
+			case 'L':
+				return DoorDirection.LEFT;
+			default:
+				return DoorDirection.NONE;
+		}
 	}
 	public char getInitial() {
 		return initial;
 	}
 	
-	public void setDoor(char direction) {
-		switch (direction) {
-		case 'U':
-			this.direction = DoorDirection.UP;
-			break;
-		case 'L':
-			this.direction = DoorDirection.LEFT;
-			break;
-		case 'R':
-			this.direction = DoorDirection.RIGHT;
-			break;
-		case 'D':
-			this.direction = DoorDirection.DOWN;
-			break;
-		default:
-			this.direction = DoorDirection.NONE;
-			break;
-		}
+	public void setInitial2(char initial2) {
+		this.initial2 = initial2;
+	}
+	public char getInitial2() {
+		return initial2;
 	}
 }
