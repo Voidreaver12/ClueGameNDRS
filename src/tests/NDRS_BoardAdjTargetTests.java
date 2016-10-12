@@ -127,42 +127,42 @@ public class NDRS_BoardAdjTargetTests {
 		// two spaces
 		board.calcTargets(6, 16, 2);
 		targets = board.getTargets();
-//		assertEquals(8, targets.size());
-//		assertTrue(targets.contains(board.getCellAt(6, 14)));
-//		assertTrue(targets.contains(board.getCellAt(6, 18)));
-//		assertTrue(targets.contains(board.getCellAt(4, 16)));
-//		assertTrue(targets.contains(board.getCellAt(8, 16)));
-//		assertTrue(targets.contains(board.getCellAt(5, 15)));
-//		assertTrue(targets.contains(board.getCellAt(5, 17)));
-//		assertTrue(targets.contains(board.getCellAt(7, 15)));
-//		assertTrue(targets.contains(board.getCellAt(7, 17)));
-//		// three spaces
+		assertEquals(8, targets.size());
+		assertTrue(targets.contains(board.getCellAt(6, 14)));
+		assertTrue(targets.contains(board.getCellAt(6, 18)));
+		assertTrue(targets.contains(board.getCellAt(4, 16)));
+		assertTrue(targets.contains(board.getCellAt(8, 16)));
+		assertTrue(targets.contains(board.getCellAt(5, 15)));
+		assertTrue(targets.contains(board.getCellAt(5, 17)));
+		assertTrue(targets.contains(board.getCellAt(7, 15)));
+		assertTrue(targets.contains(board.getCellAt(7, 17)));
+		// three spaces
 		board.calcTargets(7, 8, 3);
 		targets = board.getTargets();
 		assertEquals(13, targets.size());
-//		assertTrue(targets.contains(board.getCellAt(4, 8)));
-//		assertTrue(targets.contains(board.getCellAt(5, 7)));
-//		assertTrue(targets.contains(board.getCellAt(5, 9)));
-//		assertTrue(targets.contains(board.getCellAt(6, 8)));
-//		assertTrue(targets.contains(board.getCellAt(6, 6)));
-//		assertTrue(targets.contains(board.getCellAt(7, 7)));
-//		assertTrue(targets.contains(board.getCellAt(7, 9)));
-//		assertTrue(targets.contains(board.getCellAt(7, 11)));
-//		assertTrue(targets.contains(board.getCellAt(8, 6)));
-//		assertTrue(targets.contains(board.getCellAt(8, 8)));
-//		assertTrue(targets.contains(board.getCellAt(8, 10)));
-//		assertTrue(targets.contains(board.getCellAt(9, 7)));
-//		assertTrue(targets.contains(board.getCellAt(10, 8)));
-//		// four spaces
-//		board.calcTargets(15, 0, 4);
-//		targets = board.getTargets();
-//		assertEquals(4, targets.size());
-//		assertTrue(targets.contains(board.getCellAt(15, 2)));
-//		assertTrue(targets.contains(board.getCellAt(15, 4)));
-//		assertTrue(targets.contains(board.getCellAt(16, 1)));
-//		assertTrue(targets.contains(board.getCellAt(16, 3)));	
+		assertTrue(targets.contains(board.getCellAt(4, 8)));
+		assertTrue(targets.contains(board.getCellAt(5, 7)));
+		assertTrue(targets.contains(board.getCellAt(5, 9)));
+		assertTrue(targets.contains(board.getCellAt(6, 8)));
+		assertTrue(targets.contains(board.getCellAt(6, 6)));
+		assertTrue(targets.contains(board.getCellAt(7, 7)));
+		assertTrue(targets.contains(board.getCellAt(7, 9)));
+		assertTrue(targets.contains(board.getCellAt(7, 11)));
+		assertTrue(targets.contains(board.getCellAt(8, 6)));
+		assertTrue(targets.contains(board.getCellAt(8, 8)));
+		assertTrue(targets.contains(board.getCellAt(8, 10)));
+		assertTrue(targets.contains(board.getCellAt(9, 7)));
+		assertTrue(targets.contains(board.getCellAt(10, 8)));
+		// four spaces
+		board.calcTargets(15, 0, 4);
+		targets = board.getTargets();
+		assertEquals(4, targets.size());
+		assertTrue(targets.contains(board.getCellAt(15, 2)));
+		assertTrue(targets.contains(board.getCellAt(15, 4)));
+		assertTrue(targets.contains(board.getCellAt(16, 1)));
+		assertTrue(targets.contains(board.getCellAt(16, 3)));	
 	}
-/*	
+	
 	// targets on walkways that are close enough to enter a room
 	@Test
 	public void testTargetsEnteringRoom() {
@@ -206,5 +206,4 @@ public class NDRS_BoardAdjTargetTests {
 		assertEquals(1, targets.size());
 		assertTrue(targets.contains(board.getCellAt(18, 10)));	
 	}
-	*/
 }

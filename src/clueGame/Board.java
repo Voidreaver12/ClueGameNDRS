@@ -146,22 +146,32 @@ public class Board {
 //		int x, y, z;
 //		for (int i = 0; i < numRows; i++){
 //			for (int j = 0; j < numColumns; j++){
-//				x = Math.abs(numColumns - 1 - column);
-//				y = Math.abs(numRows - 1 - row);
+//				if (row == i && column == j) continue; // makes sure the original cell doesn't get added 
+//				x = 0;
+//				y = 0;
+//				z = 0;
+//				x = Math.abs(column - j);
+//				y = Math.abs(row - i);
 //				z = x + y;
 //				if (numSteps % 2 == 0){
 //					if (z % 2 == 0 && z <= numSteps){
+//						if (board[i][j].isWalkway() || board[i][j].isDoorway()){
 //						targets.add(board[i][j]);
+//						System.out.println("EVENcell: " + i + " " + j);
+//						}
 //					}
 //				}
 //				if (numSteps % 2 == 1){
+//					if (board[i][j].isWalkway() || board[i][j].isDoorway()){
 //					if (z % 2 == 1 && z <= numSteps){
 //						targets.add(board[i][j]);
+//						System.out.println("ODDcell: " + i + " " + j);
+//					}
 //					}
 //				}
 //			}
-//		}			
-//
+//		}	
+
 //		Set<BoardCell> tempSet = getAdjList(row, column);		
 //
 //		if (numSteps == 1) {
@@ -176,19 +186,24 @@ public class Board {
 //				calcTargets(cell.getRow(), cell.getColumn(), numSteps-1);
 //			}
 //		}
-
-		Set<BoardCell> tempSet = getAdjList(row, column);		
-		if (numSteps == 0) return;
-		for (BoardCell cell : tempSet) {
-			if (!targets.contains(cell)) {
-				if (numSteps % 2 == 1)
-					targets.add(cell);
-			}
+		
+		if (numSteps == 0){ 
+			targets.add(board[row][column]);
+			return; 
 		}
-		for (BoardCell cell : tempSet) {
-			calcTargets(cell.getRow(), cell.getColumn(), numSteps-1);
-		}
-		return;
+		//Set<BoardCell> tempSet = getAdjList(row, column);
+		if (row != 0) calcTargets(row - 1, column, numSteps - 1);
+		if (column != 0) calcTargets(row, column - 1, numSteps - 1);
+		if (row != numRows - 1) calcTargets(row + 1, column, numSteps - 1);
+		if (column != numColumns - 1) calcTargets(row, column + 1, numSteps - 1);
+		
+//		for (BoardCell cell : tempSet) {
+//			if (!targets.contains(cell)){
+//				targets.add(cell);
+//				System.out.println("Row: " + cell.getRow() + " Col: " + cell.getColumn());
+//				calcTargets(cell.getRow(), cell.getColumn(), numSteps - 1);
+//			}
+//		}
 	}
 
 	public Set<BoardCell> getTargets() {
