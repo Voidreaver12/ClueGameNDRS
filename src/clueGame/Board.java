@@ -128,13 +128,13 @@ public class Board {
 			if (row != 0 && (board[row-1][column].isWalkway() || board[row-1][column].isDoorway()) ) {
 				temp.add(board[row-1][column]);
 			}
-			if (row != board.length - 1 && (board[row+1][column].isWalkway() || board[row+1][column].isDoorway()) ) {
+			if (row != numRows - 1 && (board[row+1][column].isWalkway() || board[row+1][column].isDoorway()) ) {
 				temp.add(board[row+1][column]);
 			}
-			if (column != 0 && (board[row][column-1].isWalkway() || board[row][column-1].isDoorway()) ) {
+			if (column != 0){// && (board[row][column-1].isWalkway() || board[row][column-1].isDoorway()) ) {
 				temp.add(board[row][column-1]);
 			}
-			if (column != board[0].length && (board[row][column-1].isWalkway() || board[row][column-1].isDoorway())) {
+			if (column != numColumns-1 && (board[row][column+1].isWalkway() || board[row][column+1].isDoorway())) {
 				temp.add(board[row][column+1]);
 			}
 		}

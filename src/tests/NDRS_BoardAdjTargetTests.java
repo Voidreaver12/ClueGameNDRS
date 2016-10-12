@@ -110,7 +110,7 @@ public class NDRS_BoardAdjTargetTests {
 		assertTrue(testList.contains(board.getCellAt(20, 15)));
 		assertTrue(testList.contains(board.getCellAt(19, 14)));
 	}
-/*	
+	
 	// Target Tests
 	
 	// targets from walkways with 1,2,3,4 spaces
@@ -162,7 +162,7 @@ public class NDRS_BoardAdjTargetTests {
 		assertTrue(targets.contains(board.getCellAt(16, 1)));
 		assertTrue(targets.contains(board.getCellAt(16, 3)));	
 	}
-	
+/*	
 	// targets on walkways that are close enough to enter a room
 	@Test
 	public void testTargetsEnteringRoom() {
