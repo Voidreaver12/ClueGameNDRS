@@ -7,5 +7,5 @@ H, HillHall, Card
 L, Library, Card
 A, Alderson, Card
 I, IntramuralFields, Card
-K, Kafadar, Card
-X, Streets, Other
+K, Kafadar, Other
+W, Walkway, Other

@@ -1,3 +1,5 @@
+// Noah Deibert
+// Robert Schreibman
 package tests;
 
 import static org.junit.Assert.*;
@@ -35,7 +37,7 @@ public class NDRS_FileInitTests {
 		assertEquals("CTLM", legend.get('C'));
 		assertEquals("IntramuralFields", legend.get('I'));
 		assertEquals("Kafadar", legend.get('K'));
-		assertEquals("Streets", legend.get('X'));
+		assertEquals("Walkway", legend.get('W'));
 		
 	}
 	
@@ -86,7 +88,7 @@ public class NDRS_FileInitTests {
 		assertEquals('G', board.getCellAt(0, 17).getInitial());
 		assertEquals('A', board.getCellAt(14, 6).getInitial());
 		assertEquals('C', board.getCellAt(16, 23).getInitial());
-		assertEquals('X', board.getCellAt(7, 7).getInitial());
+		assertEquals('W', board.getCellAt(7, 7).getInitial());
 		assertEquals('K', board.getCellAt(12,12).getInitial());
 	}
 	

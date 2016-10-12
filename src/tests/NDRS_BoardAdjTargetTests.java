@@ -1,3 +1,5 @@
+// Noah Deibert
+// Robert Schreibman
 package tests;
 
 import static org.junit.Assert.*;
@@ -75,7 +77,7 @@ public class NDRS_BoardAdjTargetTests {
 		assertTrue(testList.contains(board.getCellAt(17, 10)));
 		assertTrue(testList.contains(board.getCellAt(19, 10)));
 	}
-
+	
 	// Adjacency on walkways in various conditions (red)
 	@Test
 	public void testAdjOnWalkways() {
@@ -169,7 +171,7 @@ public class NDRS_BoardAdjTargetTests {
 		// does not need all spaces to enter room
 		board.calcTargets(10, 3, 4);
 		Set<BoardCell> targets = board.getTargets();
-		assertEquals(4, targets.size());
+		assertEquals(12, targets.size());
 		assertTrue(targets.contains(board.getCellAt(7, 2)));
 		assertTrue(targets.contains(board.getCellAt(7, 3)));
 		assertTrue(targets.contains(board.getCellAt(8, 3)));
@@ -199,11 +201,17 @@ public class NDRS_BoardAdjTargetTests {
 	public void testTargetsExitingRoom() {
 		board.calcTargets(15, 19, 3);
 		Set<BoardCell> targets = board.getTargets();
-		assertEquals(1, targets.size());
-		assertTrue(targets.contains(board.getCellAt(15, 18)));	
+		System.out.println(targets);
+		assertEquals(4, targets.size());
+		assertTrue(targets.contains(board.getCellAt(17, 18)));	
+		assertTrue(targets.contains(board.getCellAt(15, 16)));
+		assertTrue(targets.contains(board.getCellAt(14, 17)));
+		assertTrue(targets.contains(board.getCellAt(16, 17)));
 		board.calcTargets(19, 10, 2);
 		targets = board.getTargets();
-		assertEquals(1, targets.size());
-		assertTrue(targets.contains(board.getCellAt(18, 10)));	
+		assertEquals(3, targets.size());
+		assertTrue(targets.contains(board.getCellAt(17, 10)));
+		assertTrue(targets.contains(board.getCellAt(18, 11)));
+		assertTrue(targets.contains(board.getCellAt(18, 9)));
 	}
 }
