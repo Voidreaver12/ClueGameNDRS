@@ -110,7 +110,7 @@ public class Board {
 			return temp;
 		}
 		if (board[row][column].isDoorway() == true){
-			
+
 			if (row != 0 && board[row-1][column].isWalkway() ) {
 				temp.add(board[row-1][column]);
 			}
@@ -143,15 +143,54 @@ public class Board {
 		return adjMatrix.get(board[row][column]);
 	}
 	public void calcTargets(int row, int column, int numSteps) {
-		for (int i = 0; i < row; i++){
-			for (int j = 0; j < column; j++){
+//		int x, y, z;
+//		for (int i = 0; i < numRows; i++){
+//			for (int j = 0; j < numColumns; j++){
+//				x = Math.abs(numColumns - 1 - column);
+//				y = Math.abs(numRows - 1 - row);
+//				z = x + y;
+//				if (numSteps % 2 == 0){
+//					if (z % 2 == 0 && z <= numSteps){
+//						targets.add(board[i][j]);
+//					}
+//				}
+//				if (numSteps % 2 == 1){
+//					if (z % 2 == 1 && z <= numSteps){
+//						targets.add(board[i][j]);
+//					}
+//				}
+//			}
+//		}			
+//
+//		Set<BoardCell> tempSet = getAdjList(row, column);		
+//
+//		if (numSteps == 1) {
+//			for (BoardCell cell : tempSet) {
+//				if (!targets.contains(cell)) {
+//					targets.add(cell);
+//				}
+//			}
+//		}
+//		else {
+//			for (BoardCell cell : tempSet) {
+//				calcTargets(cell.getRow(), cell.getColumn(), numSteps-1);
+//			}
+//		}
 
+		Set<BoardCell> tempSet = getAdjList(row, column);		
+		if (numSteps == 0) return;
+		for (BoardCell cell : tempSet) {
+			if (!targets.contains(cell)) {
+				if (numSteps % 2 == 1)
+					targets.add(cell);
 			}
 		}
-
-
-
+		for (BoardCell cell : tempSet) {
+			calcTargets(cell.getRow(), cell.getColumn(), numSteps-1);
+		}
+		return;
 	}
+
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
