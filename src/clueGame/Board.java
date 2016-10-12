@@ -12,13 +12,13 @@ public class Board {
 	private int numRows;
 	private int numColumns;
 	public final static int MAX_BOARD_SIZE = 50;
-	private BoardCell[][] board = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
+	private BoardCell[][] board = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE]; // contains board chars
 	private Map<Character, String> rooms = new HashMap<Character, String>();
 	private Map<BoardCell, Set<BoardCell>> adjMatrix = new HashMap<BoardCell, Set<BoardCell>>();
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
 	private String boardConfigFile;
 	private String roomConfigFile;
-	
+
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
 	// ctor is private to ensure only one can be created
@@ -28,7 +28,7 @@ public class Board {
 	public static Board getInstance() {
 		return theInstance;
 	}
-	
+
 	// Initialization and file reading
 	public void initialize() {
 		try {
@@ -99,20 +99,49 @@ public class Board {
 			e.printStackTrace();
 		}
 	}
-	
+
 	// Adjacencies and targets
 	public void calcAdjacencies() {
 	}	
 	public Set<BoardCell> getAdjList(int row, int column) {
+		Set<BoardCell> temp = new HashSet<BoardCell>();
+
+		if (board[row][column].isRoom() == true){
+			return temp;
+		}
+		if (board[row][column].isDoorway() == true){
+			
+			if (row != 0 && board[row-1][column].isWalkway() ) {
+				temp.add(board[row-1][column]);
+			}
+			if (row != board.length - 1 && board[row+1][column].isWalkway() ) {
+				temp.add(board[row+1][column]);
+			}
+			if (column != 0 && board[row][column-1].isWalkway() ) {
+				temp.add(board[row][column-1]);
+			}
+			if (column != board[0].length && board[row][column+1].isWalkway()) {
+				temp.add(board[row][column+1]);
+			}
+		}
+
+		adjMatrix.put(board[row][column], temp);
 		return adjMatrix.get(board[row][column]);
 	}
 	public void calcTargets(int row, int column, int numSteps) {
-		
+		for (int i = 0; i < row; i++){
+			for (int j = 0; j < column; j++){
+
+			}
+		}
+
+
+
 	}
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
-	
+
 	// Misc getters and setters
 	public int getNumRows() {
 		return numRows;

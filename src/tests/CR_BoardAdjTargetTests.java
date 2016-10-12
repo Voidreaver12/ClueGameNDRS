@@ -77,7 +77,7 @@ public class CR_BoardAdjTargetTests {
 		assertTrue(testList.contains(board.getCellAt(6, 20)));
 		
 	}
-	
+
 	// Test adjacency at entrance to rooms
 	// These tests are GREEN in planning spreadsheet
 	@Test
@@ -110,7 +110,7 @@ public class CR_BoardAdjTargetTests {
 		assertTrue(testList.contains(board.getCellAt(14, 11)));
 		assertEquals(4, testList.size());
 	}
-
+/*
 	// Test a variety of walkway scenarios
 	// These tests are LIGHT PURPLE on the planning spreadsheet
 	@Test
@@ -314,4 +314,6 @@ public class CR_BoardAdjTargetTests {
 		assertTrue(targets.contains(board.getCellAt(4, 18)));
 	}
 
+	*/
+	
 }

@@ -10,6 +10,11 @@ public class BoardCell {
 		this.row = row;
 		this.initial = initial;
 	}
+	public BoardCell(int row, int column) { //this constructor used for IntBoard
+		super();
+		this.column = column;
+		this.row = row;
+	}
 	private int column;
 	private int row;
 	private char initial;
@@ -32,10 +37,16 @@ public class BoardCell {
 		return "BoardCell [row=" + row + ", column=" + column + "]";
 	}
 	public boolean isWalkway() {
+		if (initial == 'W'){
+			return true;
+		}
 		return false;
 		
 	}
 	public boolean isRoom() {
+		if (initial != 'W' && !(initial2 == 'U' || initial2 == 'D' || initial2 == 'L' || initial2 == 'R')){
+			return true;
+		}
 		return false;
 		
 	}
