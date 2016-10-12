@@ -37,14 +37,14 @@ public class BoardCell {
 		return "BoardCell [row=" + row + ", column=" + column + "]";
 	}
 	public boolean isWalkway() {
-		if (initial == 'W'){
+		if (initial == 'X'){
 			return true;
 		}
 		return false;
 		
 	}
 	public boolean isRoom() {
-		if (initial != 'W' && !(initial2 == 'U' || initial2 == 'D' || initial2 == 'L' || initial2 == 'R')){
+		if (initial != 'X' && !(initial2 == 'U' || initial2 == 'D' || initial2 == 'L' || initial2 == 'R')){
 			return true;
 		}
 		return false;

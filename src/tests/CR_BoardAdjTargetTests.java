@@ -85,7 +85,7 @@ public class CR_BoardAdjTargetTests {
 	{
 		// Test beside a door direction RIGHT
 		Set<BoardCell> testList = board.getAdjList(4, 4);
-		assertTrue(testList.contains(board.getCellAt(4, 3)));
+		assertTrue(testList.contains(board.getCellAt(3, 4)));
 		assertTrue(testList.contains(board.getCellAt(4, 5)));
 		assertTrue(testList.contains(board.getCellAt(5, 4)));
 		assertEquals(3, testList.size());
@@ -110,7 +110,7 @@ public class CR_BoardAdjTargetTests {
 		assertTrue(testList.contains(board.getCellAt(14, 11)));
 		assertEquals(4, testList.size());
 	}
-/*
+
 	// Test a variety of walkway scenarios
 	// These tests are LIGHT PURPLE on the planning spreadsheet
 	@Test
@@ -163,7 +163,7 @@ public class CR_BoardAdjTargetTests {
 		assertEquals(3, testList.size());
 	}
 	
-	
+/*	
 	// Tests of just walkways, 1 step, includes on edge of board
 	// and beside room
 	// Have already tested adjacency lists on all four edges, will
